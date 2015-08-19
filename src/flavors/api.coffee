@@ -1,13 +1,17 @@
 
-module.exports = 
+module.exports =
   api: ->
-    anyGraph: (msg, fn) ->
-      any = false;
-      graphs.forEach (g) ->
-        try
-          fn g
-          any = true
-        catch e
-      
-      if !any
-        throw msg
+    internal:
+      anyGraph: """function(msg, fn){
+          var any = false;
+          graphs.forEach(function(g){
+            try {
+              fn(g)
+              any = true
+            }
+            catch(e){}
+          });
+          if(!any)
+            throw msg
+        }
+        """
