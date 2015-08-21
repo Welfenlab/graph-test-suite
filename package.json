@@ -1,6 +1,6 @@
 {
   "name": "@tutor/graph-test-suite",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The in app test-suite for Tutor that registers all the graph tests.",
   "main": "lib/graph_test_suite.js",
   "dependencies": {
