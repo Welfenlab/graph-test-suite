@@ -8,7 +8,7 @@ module.exports =
     graphArray = _(tokens).chain()
       .filter "info": "dot"
       .pluck "content"
-      .map dot.read
+      .map (text) -> try dot.read text
       .map JSON.stringify
       .value()
     graphCode = graphArray.join ","
