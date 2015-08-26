@@ -23,11 +23,15 @@ gulp.task("bundle", function(){
 
 // simple transpile if you want to bundle it yourself
 // using this can reduce the size of your own bundle
-gulp.task("transpile", function(){
+gulp.task("transpile_coffee", function(){
   gulp.src('./src/**/*.coffee')
     .pipe(coffee({bare: true}).on('error', gutil.log))
     .pipe(gulp.dest('./lib/'))
 });
+gulp.task("copy_js", function(){
+  gulp.src('./src/**/*.js')
+    .pipe(gulp.dest('./lib/'))
+})
 
 gulp.task("watch_coffee", function(){
   gulp.src('./src/**/*.coffee')
@@ -46,6 +50,6 @@ gulp.task("watch_js", function(){
 
 gulp.task("watch", ["watch_coffee", "watch_js"]);
 
-gulp.task("build", ["bundle", "transpile"]);
+gulp.task("build", ["bundle", "transpile_coffee", "copy_js"]);
 
 gulp.task("default", ["build"]);
