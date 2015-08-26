@@ -26,7 +26,31 @@ var api = load("./lib/flavors/js");
 describe("Tree tests", function(){
   it("should recognize one node as a tree", function(){
     graph = dot.read(fs.readFileSync("./test/dot_files/one_node.dot","utf8"));
-    
     api.isTree(graph).should.be.true;
+  });
+
+  it("should not recognize a directed circle as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/directed_circle.dot","utf8"));
+    api.isTree(graph).should.be.false;
+  });
+
+  it("should not recognize a self loop as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/directed_self.dot","utf8"));
+    api.isTree(graph).should.be.false;
+  });
+
+  it("should recognize a simple directed tree as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/simple_tree.dot","utf8"));
+    api.isTree(graph).should.be.true;
+  });
+
+  it("should recognize a simple undirected tree as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/simple_undirected_tree.dot","utf8"));
+    api.isTree(graph).should.be.true;
+  });
+
+  it("should not recognize an undirected circle as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/undirected_circle.dot","utf8"));
+    api.isTree(graph).should.be.false;
   });
 });

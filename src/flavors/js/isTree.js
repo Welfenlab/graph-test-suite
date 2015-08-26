@@ -24,6 +24,9 @@ function(g){
       if(isDirected) {
         lastVisited = node;
       }
+      if(g._edgeObjs[children[i]].w == node) {
+        return false;
+      }
       if(!rec(g._edgeObjs[children[i]].w, visited, lastVisited)) {
         return false;
       }
