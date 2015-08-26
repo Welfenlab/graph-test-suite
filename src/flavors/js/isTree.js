@@ -1,23 +1,44 @@
 function(g){
-  var keys = Object.keys(g);
-  var root = root(g);
-  if(root == null) {
-    return false;
+  var keys = Object.keys(g._nodes);
+  var rootNode;
+  var isDirected = g._isDirected;
+  if(g._isDirected) {
+    rootNode = root(g);
+    if(rootNode == null) {
+      return false;
+    }
+  } else {
+    rootNode = keys[0];
   }
 
   var visited = {};
-  var lastVisited = 0;
 
-  var rec = function(node, visited, isDirected, lastVisited) {
+  var rec = function(node, visited, lastVisited) {
     if(visited[node] == 1 && node != lastVisited) {
       return false;
     }
-
-    if(isDirected) {
-      lastVisited = node;
-    }
     visited[node] = 1;
 
-    var children = Object.keys(node._out);
+    var children = Object.keys(g._out[node]);
+    for(var i=0; i<children.length; i++) {
+      if(isDirected) {
+        lastVisited = node;
+      }
+      if(!rec(g._edgeObjs[children[i]].w, visited, lastVisited)) {
+        return false;
+      }
+    }
+
+    return true;
   }
+
+  if(rec(rootNode, visited, null)) {
+    for(var i=0; i<keys.length; i++) {
+      if(visited[keys[i]] != 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
 }
