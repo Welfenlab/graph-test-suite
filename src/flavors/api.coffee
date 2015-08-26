@@ -1,5 +1,7 @@
 
-module.exports = 
+fs = require 'fs'
+
+module.exports =
   api: ->
     snippets:
       anyGraph: """function(msg,fn){it(msg, function(){
@@ -16,3 +18,6 @@ module.exports =
           }
         });}
         """
+      isTree: fs.readFileSync __dirname + '/js/isTree.js', "utf8"
+
+      root: fs.readFileSync __dirname + '/js/root.js', "utf8"

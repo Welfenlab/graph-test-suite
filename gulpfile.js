@@ -10,7 +10,7 @@ var plumber     = require('gulp-plumber');
 gulp.task("bundle", function(){
   bundler = browserify('./src/graph_test_suite.coffee',
     {
-      transform: ['coffeeify'],
+      transform: ['coffeeify','brfs'],
       standalone: 'testSuite',
       extensions: ['.coffee'],
       debug: false
@@ -29,13 +29,22 @@ gulp.task("transpile", function(){
     .pipe(gulp.dest('./lib/'))
 });
 
-gulp.task("watch", function(){
+gulp.task("watch_coffee", function(){
   gulp.src('./src/**/*.coffee')
     .pipe(watch('./src/**/*.coffee'))
     .pipe(plumber())
     .pipe(coffee({bare: true}).on('error', gutil.log))
     .pipe(gulp.dest('./lib/'))
 });
+
+gulp.task("watch_js", function(){
+  gulp.src('./src/**/*.js')
+    .pipe(watch('./src/**/*.js'))
+    .pipe(plumber())
+    .pipe(gulp.dest('./lib/'))
+});
+
+gulp.task("watch", ["watch_coffee", "watch_js"]);
 
 gulp.task("build", ["bundle", "transpile"]);
 
