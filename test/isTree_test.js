@@ -17,13 +17,12 @@ var load = function(js_path){
     funDefs += varName + "=" + fs.readFileSync(filePath,"utf8") + ";api[\""+varName+"\"]="+varName+";";
   });
   evalString += funDefs + "api;"
-  console.log(evalString);
   return eval(evalString);
 }
 
 var api = load("./lib/flavors/js");
 
-describe("Tree tests", function(){
+describe("isTree tests", function(){
   it("should recognize one node as a tree", function(){
     graph = dot.read(fs.readFileSync("./test/dot_files/one_node.dot","utf8"));
     api.isTree(graph).should.be.true;
@@ -51,6 +50,11 @@ describe("Tree tests", function(){
 
   it("should not recognize an undirected circle as a tree", function(){
     graph = dot.read(fs.readFileSync("./test/dot_files/undirected_circle.dot","utf8"));
+    api.isTree(graph).should.be.false;
+  });
+
+  it("should not recognize two roots as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/tworoots.dot","utf8"));
     api.isTree(graph).should.be.false;
   });
 });
