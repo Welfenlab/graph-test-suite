@@ -1,16 +1,15 @@
 function(g){
-  return preorderToString(root(g));
-
-  var preorderToString = function(node) {
+  var preorderToArray = function(node) {
     var children = Object.keys(g._out[node]);
-    var string = "" + node;
+    var order = [node];
 
-    for (int i=0; i<children.length; i++) {
+    for (var i=0; i<children.length; i++) {
       var childNode = g._edgeObjs[children[i]].w;
-      string += ",";
-      string += preorderToString(childNode);
+      order = order.concat(preorderToArray(childNode));
     }
 
-    return string
+    return order;
   }
+
+  return preorderToArray(root(g));
 }
