@@ -39,3 +39,7 @@ module.exports =
       isMaxHeap: fs.readFileSync __dirname + '/js/isMaxHeap.js', "utf8"
 
       isMinHeap: fs.readFileSync __dirname + '/js/isMinHeap.js', "utf8"
+
+      isAlmostCompleteTree: fs.readFileSync __dirname + '/js/isAlmostCompleteTree.js', "utf8"
+
+      depthFirstSearch: fs.readFileSync __dirname + '/js/depthFirstSearch.js', "utf8"

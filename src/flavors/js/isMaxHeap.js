@@ -1,61 +1,30 @@
 function(g){
-  //macht noch nichts richtiges
-  if(!isBinaryTree(g)) {
+  if(!isAlmostCompleteTree(g)) {
     return false;
   }
-  var treeHeight = height(g);
-  var rootnode = root(g);
 
-  var recHeap = function(node, h){
-    var children = Object.keys(g._out[node]);
-    if(h<treeHeight-1){
-      if(children.length!=2){
-        return false;
-      }
-      for(var i=0; i<children.length; i++) {
-        if(!recHeap(g._edgeObjs[children[i]].w,h+1)) {
-          return false;
-        }
-      }
-      return true;
-    }
-    else if(h==treeHeight-1){
-      var neighbour = getNeighbour(node);
+  var levelOrderHeap = levelorder(g);
 
-      if(neighbour != null){
-        if(children.length < 2 && Object.keys(g._out[neighbour]).length > 0) {
-          return false;
-        }
-      }
-      return true;
-
+  for(var i=0; i<levelOrderHeap.length; i++) {
+    var parent = levelOrderHeap[i];
+    if(!isNaN(parseInt(parent))) {
+      parent = parseInt(parent);
     }
-    else{
-      return true;
+    var child = levelOrderHeap[2*i+1];
+    if(!isNaN(parseInt(child))) {
+      child = parseInt(child);
     }
-
-  }
- //noch kacke!
-  var nodeHeight = function(node) {
-    var children = Object.keys(g._out[node]);
-    var max = 0;
-    for(var i=0; i<children.length; i++) {
-      if(nodeHeight(g._edgeObjs[children[i]].w)>max){
-        max = nodeHeight(g._edgeObjs[children[i]].w);
-      }
+    if(2*i+1 < levelOrderHeap.length && parent < child) {
+      return false;
     }
-    return max + 1;
+    child = levelOrderHeap[2*i+2];
+    if(!isNaN(parseInt(child))) {
+      child = parseInt(child);
+    }
+    if(2*i+2 < levelOrderHeap.length && parent < child) {
+      return false;
+    }
   }
 
-  var getNeighbour = function(node) {
-    var queue = levelorder(g);
-    for(var i=0; i<queue.length; i++) {
-      if(queue[i] == node && i<(queue.length -1) && nodeHeight(queue[i+1]) == nodeHeight(node)) {
-        return queue[i+1];
-      }
-    }
-    return null;
-  }
-
-  return recHeap(rootnode,1);
+  return true;
 }

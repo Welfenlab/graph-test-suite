@@ -4,7 +4,7 @@ function(g){
   var isDirected = g._isDirected;
   if(g._isDirected) {
     rootNode = root(g);
-    if(rootNode == null) {
+    if(rootNode === null) {
       return false;
     }
   } else {
@@ -33,7 +33,7 @@ function(g){
     }
 
     return true;
-  }
+  };
 
   if(rec(rootNode, visited, null)) {
     for(var i=0; i<keys.length; i++) {
