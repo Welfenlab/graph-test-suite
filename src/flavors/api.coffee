@@ -20,6 +20,10 @@ module.exports =
         """
       isTree: fs.readFileSync __dirname + '/js/isTree.js', "utf8"
 
+      isDirectedTree: fs.readFileSync __dirname + '/js/isDirectedTree.js', "utf8"
+
+      isUndirectedTree: fs.readFileSync __dirname + '/js/isUndirectedTree.js', "utf8"
+
       root: fs.readFileSync __dirname + '/js/root.js', "utf8"
 
       height: fs.readFileSync __dirname + '/js/height.js', "utf8"
@@ -43,3 +47,5 @@ module.exports =
       isAlmostCompleteTree: fs.readFileSync __dirname + '/js/isAlmostCompleteTree.js', "utf8"
 
       depthFirstSearch: fs.readFileSync __dirname + '/js/depthFirstSearch.js', "utf8"
+
+      isSearchTree: fs.readFileSync __dirname + '/js/isSearchTree.js', "utf8"
