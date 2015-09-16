@@ -2,7 +2,7 @@ function(g){
   var keys = Object.keys(g._nodes);
   var rootNode;
   var isDirected = g._isDirected;
-  if(g._isDirected) {
+  if(isDirected) {
     rootNode = root(g);
     if(rootNode === null) {
       return false;
