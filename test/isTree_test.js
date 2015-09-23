@@ -62,4 +62,24 @@ describe("isTree tests", function(){
     graph = dot.read(fs.readFileSync("./test/dot_files/notBinary.dot","utf8"));
     api.isTree(graph).should.be.true;
   });
+
+  it("should not recognize a loop in a tree as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/directedLoop.dot","utf8"));
+    api.isTree(graph).should.be.false;
+  });
+
+  it("should not recognize a loop in an undirected tree as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/undirectedLoop.dot","utf8"));
+    api.isTree(graph).should.be.false;
+  });
+
+  it("should not recognize two edges between two nodes as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/directedMultiEdges.dot","utf8"));
+    api.isTree(graph).should.be.false;
+  });
+
+  it("should not recognize two edges between two nodes in an undirected tree as a tree", function(){
+    graph = dot.read(fs.readFileSync("./test/dot_files/undirectedMultiEdges.dot","utf8"));
+    api.isTree(graph).should.be.false;
+  });
 });

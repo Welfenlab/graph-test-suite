@@ -49,3 +49,11 @@ module.exports =
       depthFirstSearch: fs.readFileSync __dirname + '/js/depthFirstSearch.js', "utf8"
 
       isSearchTree: fs.readFileSync __dirname + '/js/isSearchTree.js', "utf8"
+
+      breadthFirstSearch: fs.readFileSync __dirname + '/js/breadthFirstSearch.js', "utf8"
+
+      undirectedConnectedComponents: fs.readFileSync __dirname + '/js/undirectedConnectedComponents.js', "utf8"
+
+      directedWeakConnectedComponents: fs.readFileSync __dirname + '/js/directedWeakConnectedComponents.js', "utf8"
+
+      directedStrongConnectedComponents: fs.readFileSync __dirname + '/js/directedStrongConnectedComponents.js', "utf8"

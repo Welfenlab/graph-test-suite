@@ -19,9 +19,6 @@ function(g){
       children[j] = g._edgeObjs[children[j]].w;
     }
     for(var i=0; i<children.length; i++) {
-      /*if(children[i] == node) {
-        return false;
-      }*/
       if(!rec(children[i], visited)) {
         return false;
       }
